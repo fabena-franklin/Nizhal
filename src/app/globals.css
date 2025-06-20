@@ -119,25 +119,24 @@
     bottom: 0;
     background: transparent;
     box-shadow:
-      /* Sparser, varied stars */
-      10vw 20vh 0 0px hsla(0, 0%, 100%, 0.7), 
-      30vw 80vh 0 0px hsla(0, 0%, 100%, 0.5),
-      50vw 50vh 0 0px hsla(0, 0%, 100%, 0.8), 
-      70vw 15vh 0 0px hsla(0, 0%, 100%, 0.6),
-      90vw 70vh 0 0px hsla(0, 0%, 100%, 0.4),
+      10vw 20vh 0 1px hsla(0, 0%, 100%, 1.0), 
+      30vw 80vh 0 1px hsla(0, 0%, 100%, 1.0),
+      50vw 50vh 0 1px hsla(0, 0%, 100%, 1.0), 
+      70vw 15vh 0 1px hsla(0, 0%, 100%, 1.0),
+      90vw 70vh 0 1px hsla(0, 0%, 100%, 1.0),
       
-      5vw 90vh 0 1px hsla(0, 0%, 100%, 0.3),  /* Fainter, slightly larger */
-      25vw 5vh 0 1px hsla(0, 0%, 100%, 0.5),
-      45vw 75vh 0 1px hsla(0, 0%, 100%, 0.2),
-      65vw 30vh 0 1px hsla(0, 0%, 100%, 0.6),
-      85vw 55vh 0 1px hsla(0, 0%, 100%, 0.4),
+      5vw 90vh 0 1px hsla(0, 0%, 100%, 1.0),
+      25vw 5vh 0 1px hsla(0, 0%, 100%, 1.0),
+      45vw 75vh 0 1px hsla(0, 0%, 100%, 1.0),
+      65vw 30vh 0 1px hsla(0, 0%, 100%, 1.0),
+      85vw 55vh 0 1px hsla(0, 0%, 100%, 1.0),
 
-      18vw 40vh 0 0px hsla(0, 0%, 100%, 0.75),
-      38vw 65vh 0 0px hsla(0, 0%, 100%, 0.55),
-      58vw 10vh 0 0px hsla(0, 0%, 100%, 0.85),
-      78vw 85vh 0 0px hsla(0, 0%, 100%, 0.65),
-      95vw 35vh 0 0px hsla(0, 0%, 100%, 0.45);
-    animation: twinkle-stars 3s ease-in-out infinite; /* Faster animation, no alternate for sharper loop */
+      18vw 40vh 0 1px hsla(0, 0%, 100%, 1.0),
+      38vw 65vh 0 1px hsla(0, 0%, 100%, 1.0),
+      58vw 10vh 0 1px hsla(0, 0%, 100%, 1.0),
+      78vw 85vh 0 1px hsla(0, 0%, 100%, 1.0),
+      95vw 35vh 0 1px hsla(0, 0%, 100%, 1.0);
+    animation: twinkle-stars 3s ease-in-out infinite;
     z-index: -1; 
     pointer-events: none;
   }
