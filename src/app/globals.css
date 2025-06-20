@@ -126,17 +126,17 @@
     background-image:
       repeating-linear-gradient(
         45deg,
-        hsla(var(--primary-raw), 0.05), /* Increased opacity */
-        hsla(var(--primary-raw), 0.05) 1px,
-        transparent 1px,
-        transparent 60px /* Spacing between lines */
+        hsla(var(--primary-raw), 0.2), /* Significantly increased opacity */
+        hsla(var(--primary-raw), 0.2) 2px, /* Increased thickness */
+        transparent 2px,
+        transparent 30px /* Reduced spacing for density */
       ),
       repeating-linear-gradient(
         -45deg,
-        hsla(var(--primary-raw), 0.04), /* Increased opacity */
-        hsla(var(--primary-raw), 0.04) 1px,
-        transparent 1px,
-        transparent 60px
+        hsla(var(--primary-raw), 0.15), /* Significantly increased opacity */
+        hsla(var(--primary-raw), 0.15) 2px, /* Increased thickness */
+        transparent 2px,
+        transparent 30px /* Reduced spacing for density */
       );
     background-size: 200% 200%; /* Larger size for smoother animation */
     animation: line-flow 60s linear infinite;
