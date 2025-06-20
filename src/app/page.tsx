@@ -135,6 +135,11 @@ export default function NizhalPage() {
       </ScrollArea>
       
       <ChatInputForm onSubmit={handleUserSubmit} isLoading={isLoading} />
+      <footer className="p-2 text-center">
+        <p className="text-xs text-muted-foreground">
+          Nizhal may produce inaccurate information about people, places, or facts.
+        </p>
+      </footer>
     </div>
   );
 }
