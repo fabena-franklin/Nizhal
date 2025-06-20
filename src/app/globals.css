@@ -4,8 +4,8 @@
 
 @layer base {
   :root {
-    --background: 100 60% 97%; /* Very light, almost off-white minty green */
-    --foreground: 222 20% 30%; /* Dark grayish blue for text */
+    --background: 0 0% 8%; /* Dark charcoal for base */
+    --foreground: 100 30% 90%; /* Light, slightly desaturated minty color for text */
 
     /* AI Message Bubble & Textarea Background */
     --card: 100 40% 92%;
@@ -52,8 +52,9 @@
   }
 
   .dark {
-    --background: 222 20% 12%;
-    --foreground: 100 10% 90%;
+    --background: 222 20% 12%; /* Default dark theme background */
+    --foreground: 100 10% 90%; /* Default dark theme foreground */
+    /* Keeping other dark theme vars, they might need review if user frequently uses dark mode with this new bg */
     --card: 222 20% 18%;
     --card-foreground: 100 10% 90%;
     --popover: 222 20% 18%;
@@ -93,7 +94,8 @@
   }
   body {
     @apply text-foreground;
-    background-color: hsl(var(--background));
+    /* background-color: hsl(var(--background)); */ /* Base color if gradient not supported/visible */
+    background-image: linear-gradient(to bottom right, hsl(0, 0%, 8%) 0%, hsl(100, 35%, 18%) 100%); /* Dark charcoal to deep green */
     background-repeat: no-repeat;
     background-attachment: fixed; /* Keeps gradient fixed during scroll */
     min-height: 100vh; /* Ensures gradient covers full viewport height */
