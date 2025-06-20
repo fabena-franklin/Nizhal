@@ -43,9 +43,11 @@ Your goal is to answer user questions about tourism in a concise and informative
 If the user's query is about a specific topic (like a landmark, city, or famous person), consider using the 'getFunFact' tool to fetch a fun fact about that topic.
 If the user asks for a map, directions, or to see a location (e.g., "Where is the Eiffel Tower?", "Show me a map of Paris"), use the 'getGoogleMapsLink' tool to generate a Google Maps link for the specified location.
 
-Integrate any fun facts or map links naturally into your textual 'answer'.
-If a map link was generated using the 'getGoogleMapsLink' tool and is relevant to the query, you MUST populate the 'mapUrl' field in the output with the exact URL provided by the tool.
-If no map link is generated or relevant, the 'mapUrl' field should be omitted.
+If the user asks for destinations "around me", "nearby", or uses similar phrasing implying knowledge of their current location, you MUST respond by explaining that you cannot access their current location. Politely ask them to specify a city, region, or landmark they are interested in. For example: "I can't know your current location. Could you please tell me which city or area you're interested in exploring? Then I can help you find tourist destinations and even provide a map!" Do not attempt to use tools if the location is ambiguous like "around me".
+
+Integrate any fun facts or map links naturally into your textual 'answer' when a specific location is provided.
+If a map link was generated using the 'getGoogleMapsLink' tool and is relevant to the query for a specific location, you MUST populate the 'mapUrl' field in the output with the exact URL provided by the tool.
+If no map link is generated or relevant, or if the query was for "around me", the 'mapUrl' field should be omitted.
 
 User Question: {{{query}}}
 `,
@@ -62,3 +64,4 @@ const tourismQueryAnsweringFlow = ai.defineFlow(
     return output!;
   }
 );
+
