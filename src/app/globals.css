@@ -101,55 +101,39 @@
     z-index: 0; /* Ensure body acts as a base for z-indexed pseudo-elements */
   }
 
-  body::before { /* Static subtle gradient layer */
+  /* body::before {
     content: "";
-    position: fixed; /* Cover viewport */
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     background-image: linear-gradient(
       160deg,
-      hsl(var(--background)) 0%, /* Base dark */
-      hsl(120 20% 8%) 100%      /* Slightly different dark green for depth */
+      hsl(var(--background)) 0%,
+      hsl(120 20% 8%) 100%
     );
-    z-index: -2; /* Behind animated lines and content */
-  }
+    z-index: -2;
+  } */
 
-  body::after { /* Animated lines layer */
+  body::after { /* Simplified animated layer */
     content: "";
-    position: fixed; /* Cover viewport */
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-image:
-      repeating-linear-gradient(
-        45deg,
-        hsla(var(--primary-raw), 0.2), /* Significantly increased opacity */
-        hsla(var(--primary-raw), 0.2) 2px, /* Increased thickness */
-        transparent 2px,
-        transparent 30px /* Reduced spacing for density */
-      ),
-      repeating-linear-gradient(
-        -45deg,
-        hsla(var(--primary-raw), 0.15), /* Significantly increased opacity */
-        hsla(var(--primary-raw), 0.15) 2px, /* Increased thickness */
-        transparent 2px,
-        transparent 30px /* Reduced spacing for density */
-      );
-    background-size: 200% 200%; /* Larger size for smoother animation */
-    animation: line-flow 60s linear infinite;
-    z-index: -1; /* Behind content, but above the static gradient */
-    opacity: 1; /* Pseudo-element fully opaque, line opacity controlled in hsla */
+    background-color: hsla(var(--primary-raw), 0.1); /* Semi-transparent green */
+    animation: animate-pulse-bg 5s linear infinite;
+    z-index: -1; /* Behind content */
   }
 }
 
-@keyframes line-flow {
-  0% {
-    background-position: 0% 0%;
+@keyframes animate-pulse-bg {
+  0%, 100% {
+    opacity: 0.2; /* Start and end with lower opacity */
   }
-  100% {
-    background-position: 200% 200%;
+  50% {
+    opacity: 0.4; /* Peak with higher opacity */
   }
 }
