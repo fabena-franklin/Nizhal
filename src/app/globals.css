@@ -123,7 +123,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: hsla(var(--primary-raw), 0.1); /* Semi-transparent green */
+    background-color: hsl(var(--primary-raw)); /* Solid primary green base */
     animation: animate-pulse-bg 5s linear infinite;
     z-index: -1; /* Behind content */
   }
@@ -131,9 +131,9 @@
 
 @keyframes animate-pulse-bg {
   0%, 100% {
-    opacity: 0.2; /* Start and end with lower opacity */
+    opacity: 0.1; /* Start and end with lower opacity (10%) */
   }
   50% {
-    opacity: 0.4; /* Peak with higher opacity */
+    opacity: 0.3; /* Peak with higher opacity (30%) */
   }
 }
