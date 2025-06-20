@@ -1,3 +1,4 @@
+
 // src/components/chat-input-form.tsx
 "use client";
 
@@ -47,8 +48,8 @@ export function ChatInputForm({ onSubmit, isLoading }: ChatInputFormProps) {
         onSubmit={form.handleSubmit(handleFormSubmit)}
         className="flex items-start gap-2 p-4 bg-secondary sticky bottom-0"
       >
-        <Avatar className="h-9 w-9 self-start mt-1.5 mr-1 bg-gray-800 flex-shrink-0">
-          <AvatarFallback className="text-white text-base font-medium bg-transparent">
+        <Avatar className="h-9 w-9 self-start mt-1.5 mr-1 bg-muted flex-shrink-0">
+          <AvatarFallback className="text-foreground text-base font-medium bg-transparent">
             N
           </AvatarFallback>
         </Avatar>
