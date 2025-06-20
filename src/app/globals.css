@@ -18,6 +18,7 @@
     /* Send Button, Title Text, Leaf Icon, User Message Bubble */
     --primary: 120 60% 45%; /* Vibrant, rich green */
     --primary-foreground: 120 20% 98%; /* Very light color for text on primary */
+    --primary-raw: 120, 60%, 45%; /* Raw HSL values for primary, for animation */
     
     /* Header & Input Bar Background */
     --secondary: 210 10% 10%; /* Slightly lighter dark than main bg for depth */
@@ -26,10 +27,10 @@
     --muted: 210 10% 20%; /* For subtle elements like User Avatar background */
     --muted-foreground: 210 10% 60%; /* Muted text on muted bg */
 
-    --accent: 120 50% 60%; /* Lighter, brighter green for links/accents/AI bot icon */
+    --accent: 120 50% 65%; /* Lighter, brighter green for links/accents/AI bot icon */
     --accent-foreground: 120 20% 98%; /* Very light text on accent */
 
-    --destructive: 0 70% 50%; /* Red for errors */
+    --destructive: 0 60% 50%; /* Red for errors */
     --destructive-foreground: 0 0% 98%;
 
     --border: 210 10% 25%; /* Subtle dark borders */
@@ -61,6 +62,7 @@
     --popover-foreground: 120 25% 85%;
     --primary: 120 60% 45%;
     --primary-foreground: 120 20% 98%;
+    --primary-raw: 120, 60%, 45%;
     --secondary: 210 10% 10%;
     --secondary-foreground: 120 25% 70%;
     --muted: 210 10% 20%;
@@ -86,16 +88,68 @@
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
   body {
     @apply text-foreground;
-    background-color: hsl(var(--background)); 
+    background-color: hsl(var(--background)); /* Base color */
     min-height: 100vh; 
-    overflow-x: hidden;
+    overflow-x: hidden; /* Important to prevent horizontal scroll */
+    position: relative; /* For pseudo-elements stacking context */
+    z-index: 0; /* Ensure body acts as a base for z-indexed pseudo-elements */
+  }
+
+  body::before { /* Static subtle gradient layer */
+    content: "";
+    position: fixed; /* Cover viewport */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(
+      160deg,
+      hsl(var(--background)) 0%, /* Base dark */
+      hsl(120 20% 8%) 100%      /* Slightly different dark green for depth */
+    );
+    z-index: -2; /* Behind animated lines and content */
+  }
+
+  body::after { /* Animated lines layer */
+    content: "";
+    position: fixed; /* Cover viewport */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+      repeating-linear-gradient(
+        45deg,
+        hsla(var(--primary-raw), 0.03), /* Faint primary color line */
+        hsla(var(--primary-raw), 0.03) 1px,
+        transparent 1px,
+        transparent 60px /* Spacing between lines */
+      ),
+      repeating-linear-gradient(
+        -45deg,
+        hsla(var(--primary-raw), 0.02), /* Even fainter cross line */
+        hsla(var(--primary-raw), 0.02) 1px,
+        transparent 1px,
+        transparent 60px
+      );
+    background-size: 200% 200%; /* Larger size for smoother animation */
+    animation: line-flow 60s linear infinite;
+    z-index: -1; /* Behind content, but above the static gradient */
+    opacity: 0.7; /* Overall opacity for subtlety */
+  }
+}
+
+@keyframes line-flow {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 200% 200%;
   }
 }
