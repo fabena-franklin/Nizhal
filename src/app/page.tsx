@@ -10,7 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Leaf } from "lucide-react";
 
-export default function NizhalNavigatorPage() {
+export default function NizhalPage() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentLocation, setCurrentLocation] = useState<{ latitude: number; longitude: number } | null>(null);
@@ -120,7 +120,7 @@ export default function NizhalNavigatorPage() {
       <header className="sticky top-0 z-10 flex items-center justify-center p-4 border-b shadow-sm bg-background/80 backdrop-blur-sm">
         <Leaf className="h-8 w-8 mr-2 text-primary" />
         <h1 className="text-3xl font-headline font-bold text-primary">
-          Nizhal Navigator
+          Nizhal
         </h1>
       </header>
 
