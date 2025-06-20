@@ -61,6 +61,26 @@ If no map link is generated or relevant, the 'mapUrl' field should be omitted.
 
 User Question: {{{query}}}
 `,
+  config: {
+    safetySettings: [
+      {
+        category: 'HARM_CATEGORY_HATE_SPEECH',
+        threshold: 'BLOCK_ONLY_HIGH',
+      },
+      {
+        category: 'HARM_CATEGORY_DANGEROUS_CONTENT',
+        threshold: 'BLOCK_MEDIUM_AND_ABOVE',
+      },
+      {
+        category: 'HARM_CATEGORY_HARASSMENT',
+        threshold: 'BLOCK_MEDIUM_AND_ABOVE',
+      },
+      {
+        category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT',
+        threshold: 'BLOCK_MEDIUM_AND_ABOVE',
+      },
+    ],
+  },
 });
 
 const tourismQueryAnsweringFlow = ai.defineFlow(
@@ -75,7 +95,6 @@ const tourismQueryAnsweringFlow = ai.defineFlow(
       console.error('TourismQueryAnsweringFlow: LLM did not return a valid output or answer.', output);
       return {
         answer: "I'm sorry, I encountered an issue processing your request. Could you please try again or rephrase your question?",
-        // mapUrl will be undefined by default, which is conformant with the schema.
       };
     }
     return output;
