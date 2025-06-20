@@ -10,9 +10,19 @@ interface GetAiResponseOutput {
   mapUrl?: string;
 }
 
-export async function getAiChatResponse(query: string): Promise<GetAiResponseOutput> {
+export async function getAiChatResponse(
+  query: string,
+  userLocation?: { latitude: number; longitude: number } | null
+): Promise<GetAiResponseOutput> {
   try {
     const tourismInput: TourismQueryAnsweringInput = { query };
+    if (userLocation) {
+      tourismInput.userLocation = {
+        latitude: userLocation.latitude,
+        longitude: userLocation.longitude,
+      };
+    }
+    
     const tourismOutput: TourismQueryAnsweringOutput = await tourismQueryAnswering(tourismInput);
     const answer = tourismOutput.answer;
     const mapUrl = tourismOutput.mapUrl;

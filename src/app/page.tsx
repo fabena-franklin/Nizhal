@@ -13,6 +13,7 @@ import { Leaf } from "lucide-react";
 export default function NizhalNavigatorPage() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentLocation, setCurrentLocation] = useState<{ latitude: number; longitude: number } | null>(null);
   const { toast } = useToast();
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -37,6 +38,44 @@ export default function NizhalNavigatorPage() {
     ]);
   }, []);
 
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setCurrentLocation({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          });
+          // Optional: You could add a toast here to inform the user that location was acquired
+          // toast({ title: "Location Acquired", description: "Nizhal can now use your location for nearby suggestions." });
+        },
+        (error) => {
+          let title = "Location Access Issue";
+          let description = "Could not determine your location. To use 'nearby' features, please specify a city or region.";
+          let variant: "default" | "destructive" = "default";
+
+          if (error.code === error.PERMISSION_DENIED) {
+            description = "Location access denied. To find 'nearby' places, please enable location services for this site in your browser settings, or specify a city/region.";
+            variant = "destructive";
+          }
+          
+          toast({
+            variant: variant,
+            title: title,
+            description: description,
+          });
+          console.error("Error getting location: ", error);
+        }
+      );
+    } else {
+      toast({
+        variant: "default",
+        title: "Location Services Not Supported",
+        description: "Your browser does not support geolocation. Please specify a city or region for 'nearby' queries.",
+      });
+    }
+  }, [toast]);
+
 
   const handleUserSubmit = async (query: string) => {
     const userMessage: ChatMessage = {
@@ -54,7 +93,7 @@ export default function NizhalNavigatorPage() {
     setIsLoading(true);
 
     try {
-      const aiResponse = await getAiChatResponse(query);
+      const aiResponse = await getAiChatResponse(query, currentLocation);
       const aiMessage: ChatMessage = {
         id: (Date.now() + 2).toString(),
         sender: "ai",
