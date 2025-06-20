@@ -16,9 +16,9 @@
     --popover-foreground: 120 25% 85%;
 
     /* Send Button, Title Text, Leaf Icon, User Message Bubble */
-    --primary: 120 60% 45%; /* Vibrant, rich green */
-    --primary-foreground: 120 20% 98%; /* Very light color for text on primary */
-    --primary-raw: 120, 60%, 45%; /* Raw HSL values for primary, for animation */
+    --primary: 130 65% 50%; /* Vibrant, modern green (slightly more cyan-ish) */
+    --primary-foreground: 130 20% 98%; /* Very light color for text on primary */
+    --primary-raw: 130, 65%, 50%; /* Raw HSL values for primary, for animation */
     
     /* Header & Input Bar Background */
     --secondary: 210 10% 10%; /* Slightly lighter dark than main bg for depth */
@@ -27,15 +27,15 @@
     --muted: 210 10% 20%; /* For subtle elements like User Avatar background */
     --muted-foreground: 210 10% 60%; /* Muted text on muted bg */
 
-    --accent: 120 50% 65%; /* Lighter, brighter green for links/accents/AI bot icon */
-    --accent-foreground: 120 20% 98%; /* Very light text on accent */
+    --accent: 130 60% 70%; /* Lighter, brighter modern green for links/accents */
+    --accent-foreground: 130 20% 98%; /* Very light text on accent */
 
     --destructive: 0 60% 50%; /* Red for errors */
     --destructive-foreground: 0 0% 98%;
 
     --border: 210 10% 25%; /* Subtle dark borders */
     --input: 210 10% 25%;  /* Used for input field borders */
-    --ring: 120 60% 55%;   /* Focus ring, related to primary */
+    --ring: 130 65% 55%;   /* Focus ring, related to new primary */
 
     --radius: 0.75rem; 
     --sidebar-background: 0 0% 98%;
@@ -60,20 +60,20 @@
     --card-foreground: 120 25% 85%;
     --popover: 120 15% 12%;
     --popover-foreground: 120 25% 85%;
-    --primary: 120 60% 45%;
-    --primary-foreground: 120 20% 98%;
-    --primary-raw: 120, 60%, 45%;
+    --primary: 130 65% 50%;
+    --primary-foreground: 130 20% 98%;
+    --primary-raw: 130, 65%, 50%;
     --secondary: 210 10% 10%;
     --secondary-foreground: 120 25% 70%;
     --muted: 210 10% 20%;
     --muted-foreground: 210 10% 60%;
-    --accent: 120 50% 65%;
-    --accent-foreground: 120 20% 98%;
+    --accent: 130 60% 70%;
+    --accent-foreground: 130 20% 98%;
     --destructive: 0 60% 50%;
     --destructive-foreground: 0 0% 98%;
     --border: 210 10% 25%;
     --input: 210 10% 25%;
-    --ring: 120 60% 55%;
+    --ring: 130 65% 55%;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
@@ -111,9 +111,9 @@
     background-image: linear-gradient(
       160deg,
       hsl(var(--background)) 0%,
-      hsl(120 20% 8%) 100%
+      hsl(120 20% 8%) 100% 
     );
-    z-index: -2;
+    z-index: -2; 
   } */
 
   body::after { /* Simplified animated layer */
@@ -124,16 +124,16 @@
     right: 0;
     bottom: 0;
     background-color: hsl(var(--primary-raw)); /* Solid primary green base */
-    animation: animate-pulse-bg 5s linear infinite;
+    animation: animate-pulse-bg 10s linear infinite; /* Slower animation */
     z-index: -1; /* Behind content */
   }
 }
 
 @keyframes animate-pulse-bg {
   0%, 100% {
-    opacity: 0.1; /* Start and end with lower opacity (10%) */
+    opacity: 0.05; /* Start and end with lower opacity (5%) */
   }
   50% {
-    opacity: 0.3; /* Peak with higher opacity (30%) */
+    opacity: 0.15; /* Peak with higher opacity (15%) */
   }
 }
