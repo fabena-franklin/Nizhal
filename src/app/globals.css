@@ -81,6 +81,10 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    background-image: linear-gradient(to bottom, hsl(var(--background)), hsl(140, 40%, 92%), hsl(130, 50%, 97%));
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Keeps gradient fixed during scroll */
+    min-height: 100vh; /* Ensures gradient covers full viewport height */
   }
 }
