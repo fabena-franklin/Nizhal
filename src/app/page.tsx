@@ -33,7 +33,7 @@ export default function NizhalPage() {
       {
         id: Date.now().toString(),
         sender: 'ai',
-        text: "Hello! I'm Nizhal, your AI tourism assistant. How can I help you plan your next adventure? Try asking for information about a place, or even 'show me a map of Tokyo'!",
+        text: "Hello! I'm Nizhal, your AI assistant",
         links: []
       }
     ]);
