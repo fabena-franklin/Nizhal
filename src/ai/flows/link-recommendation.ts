@@ -20,7 +20,7 @@ export type RecommendLinksInput = z.infer<typeof RecommendLinksInputSchema>;
 
 const RecommendLinksOutputSchema = z.object({
   links: z
-    .array(z.string())
+    .array(z.string().url().or(z.string().length(0))) // Allow empty strings initially for more lenient parsing
     .describe('An array of relevant URLs for further reading.'),
 });
 export type RecommendLinksOutput = z.infer<typeof RecommendLinksOutputSchema>;
@@ -53,17 +53,29 @@ const recommendLinksFlow = ai.defineFlow(
     };
 
     const {output} = await prompt(flowInput);
+    
     if (!output || !Array.isArray(output.links)) {
       console.error('RecommendLinksFlow: LLM did not return valid links.', output);
       return {
         links: [],
       };
     }
-    // Filter out any non-string or empty string links, just in case.
-    const validLinks = output.links.filter(link => typeof link === 'string' && link.trim() !== '');
+    // Filter out any non-string, empty string, or non-URL links.
+    // The schema allows empty strings temporarily to catch malformed outputs before this filter.
+    const validLinks = output.links.filter(link => {
+        if (typeof link === 'string' && link.trim() !== '') {
+            try {
+                new URL(link); // Check if it's a valid URL
+                return true;
+            } catch (e) {
+                // console.warn(`RecommendLinksFlow: Filtered out invalid URL: ${link}`);
+                return false;
+            }
+        }
+        return false;
+    });
     return {
         links: validLinks,
     };
   }
 );
-
