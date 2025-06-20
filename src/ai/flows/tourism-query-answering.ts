@@ -28,7 +28,7 @@ export type TourismQueryAnsweringInput = z.infer<typeof TourismQueryAnsweringInp
 
 const TourismQueryAnsweringOutputSchema = z.object({
   answer: z.string().describe('The answer to the user query or a conversational response, delivered with personality.'),
-  mapUrl: z.string().url().optional().describe('A Google Maps URL relevant to a tourism query, if a map was specifically requested or is essential for a location-based tourism answer.'),
+  mapUrl: z.string().url().optional().nullable().describe('A Google Maps URL relevant to a tourism query, if a map was specifically requested or is essential for a location-based tourism answer.'),
 });
 
 export type TourismQueryAnsweringOutput = z.infer<typeof TourismQueryAnsweringOutputSchema>;
@@ -114,6 +114,7 @@ const tourismQueryAnsweringFlow = ai.defineFlow(
     
     // Ensure mapUrl is either a valid URL string or undefined.
     // Zod .optional() expects undefined, not null or an empty string for a .url() schema.
+    // If mapUrl is nullable in the schema, output.mapUrl could be null here.
     if (output.mapUrl === null || output.mapUrl === '') {
         output.mapUrl = undefined;
     }
