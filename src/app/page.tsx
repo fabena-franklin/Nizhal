@@ -1,3 +1,4 @@
+
 // src/app/page.tsx
 "use client";
 
@@ -117,7 +118,7 @@ export default function NizhalPage() {
 
   return (
     <div className="flex flex-col h-screen bg-background">
-      <header className="sticky top-0 z-10 flex items-center justify-center p-4 shadow-sm bg-secondary">
+      <header className="sticky top-0 z-10 flex items-center justify-center p-4 bg-secondary">
         <Leaf className="h-8 w-8 mr-2 text-primary" />
         <h1 className="text-3xl font-headline font-bold text-primary">
           Nizhal

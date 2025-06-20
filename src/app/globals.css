@@ -18,16 +18,15 @@
     /* Send Button, Title Text, Leaf Icon, User Message Bubble */
     --primary: 120 60% 45%; /* Vibrant, rich green */
     --primary-foreground: 120 20% 98%; /* Very light color for text on primary */
-    --primary-raw: 120, 60%, 45%; /* Raw HSL values for animations */
-
+    
     /* Header & Input Bar Background */
     --secondary: 210 10% 10%; /* Slightly lighter dark than main bg for depth */
     --secondary-foreground: 120 25% 70%; /* Muted green for text on secondary */
 
-    --muted: 210 10% 20%; /* For subtle elements */
+    --muted: 210 10% 20%; /* For subtle elements like User Avatar background */
     --muted-foreground: 210 10% 60%; /* Muted text on muted bg */
 
-    --accent: 120 50% 60%; /* Lighter, brighter green for links/accents */
+    --accent: 120 50% 60%; /* Lighter, brighter green for links/accents/AI bot icon */
     --accent-foreground: 120 20% 98%; /* Very light text on accent */
 
     --destructive: 0 70% 50%; /* Red for errors */
@@ -37,7 +36,7 @@
     --input: 210 10% 25%;  /* Used for input field borders */
     --ring: 120 60% 55%;   /* Focus ring, related to primary */
 
-    --radius: 0.75rem; /* Matches image more closely */
+    --radius: 0.75rem; 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -62,7 +61,6 @@
     --popover-foreground: 120 25% 85%;
     --primary: 120 60% 45%;
     --primary-foreground: 120 20% 98%;
-    --primary-raw: 120, 60%, 45%; /* Raw HSL values for animations */
     --secondary: 210 10% 10%;
     --secondary-foreground: 120 25% 70%;
     --muted: 210 10% 20%;
@@ -96,50 +94,8 @@
   }
   body {
     @apply text-foreground;
-    background-color: hsl(var(--background)); /* Base solid color */
-    background-repeat: no-repeat;
-    background-attachment: fixed; 
+    background-color: hsl(var(--background)); 
     min-height: 100vh; 
-    position: relative; /* Establish stacking context for pseudo-elements */
-    z-index: 0; /* Explicitly set base stacking context */
-    overflow-x: hidden; /* Prevent potential horizontal scrollbar from pseudo-elements */
-  }
-
-  body::before { /* Static Gradient Layer */
-    content: "";
-    position: fixed;
-    inset: 0;
-    background-image: linear-gradient(to bottom right, hsl(var(--background)) 0%, hsl(120, 30%, 10%) 100%);
-    z-index: -2; /* Furthest back layer */
-  }
-
-  body::after { /* Animated Lines Layer */
-    content: "";
-    position: fixed;
-    inset: 0;
-    background-image: 
-      repeating-linear-gradient(60deg, 
-        transparent, 
-        transparent 20px, /* Space between lines */
-        hsla(var(--primary-raw), 0.025) 20px, /* Fainter line color */
-        hsla(var(--primary-raw), 0.025) 22px), /* Line thickness */
-      repeating-linear-gradient(120deg, 
-        transparent, 
-        transparent 20px,
-        hsla(var(--primary-raw), 0.03) 20px, /* Slightly different faint line color */
-        hsla(var(--primary-raw), 0.03) 22px);
-    background-size: 250px 250px; /* Adjust pattern size */
-    opacity: 0.8; 
-    animation: moveLines 180s linear infinite alternate;
-    z-index: -1; /* On top of static gradient, behind actual body content */
-  }
-
-  @keyframes moveLines {
-    0% {
-      background-position: 0% 0%;
-    }
-    100% {
-      background-position: -500px -750px; /* Adjust for desired movement */
-    }
+    overflow-x: hidden;
   }
 }
