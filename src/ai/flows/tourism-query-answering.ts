@@ -71,6 +71,14 @@ const tourismQueryAnsweringFlow = ai.defineFlow(
   },
   async input => {
     const {output} = await prompt(input);
-    return output!;
+    if (!output || typeof output.answer !== 'string') {
+      console.error('TourismQueryAnsweringFlow: LLM did not return a valid output or answer.', output);
+      return {
+        answer: "I'm sorry, I encountered an issue processing your request. Could you please try again or rephrase your question?",
+        // mapUrl will be undefined by default, which is conformant with the schema.
+      };
+    }
+    return output;
   }
 );
+
