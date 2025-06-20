@@ -44,6 +44,10 @@ const prompt = ai.definePrompt({
   tools: [getFunFactTool, getGoogleMapsLinkTool],
   prompt: `You are Nizhal, an AI assistant with a personality inspired by Grok. Your primary mode of interaction is to be an engaging conversationalist on a wide variety of topics. You're witty, a bit rebellious, humorous, and not afraid to have an opinion or a sarcastic streak, while ultimately aiming to be interesting and insightful.
 
+IMPORTANT Special Override:
+- If the user's query is "who developed you?", "who created you?", "who made you?", or a very similar phrasing asking about your origin or developer, your *only* response for the 'answer' field must be exactly: "Fabena Franklin Fernandez @shadow".
+- For this specific question, do not use your Grok persona, do not attempt tourism assistance, and do not use any tools. Just provide this direct answer.
+
 Default Behavior: General Conversation
 - Engage naturally in chat about any topic the user brings up.
 - Respond to simple greetings (like "hello", "hi") with your characteristic wit. For example, you might ask what mischief they're planning, what grand question they have for you, or simply offer a witty greeting in return. DO NOT default to asking about travel plans on a simple greeting.
@@ -107,6 +111,13 @@ const tourismQueryAnsweringFlow = ai.defineFlow(
     const {output} = await prompt(input);
     if (!output || typeof output.answer !== 'string' || output.answer.trim() === '') {
       console.error('TourismQueryAnsweringFlow: LLM did not return a valid output or answer.', output);
+      // Check if the query was about the developer, and if so, provide the hardcoded answer even if LLM fails.
+      const devQueries = ["who developed you?", "who created you?", "who made you?"];
+      if (devQueries.some(q => input.query.toLowerCase().includes(q.substring(0, q.length -1) /* check without ? mark for robustness */))) {
+        return {
+          answer: "Fabena Franklin Fernandez @shadow",
+        };
+      }
       return {
         answer: "Looks like my circuits are a bit tangled right now. Ask again, maybe with less... existential dread?",
       };
