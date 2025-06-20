@@ -32,8 +32,8 @@ export async function getAiChatResponse(
     
     const tourismOutput: TourismQueryAnsweringOutput | undefined = await tourismQueryAnswering(tourismInput);
 
-    if (!tourismOutput || typeof tourismOutput.answer !== 'string') {
-      console.error("Tourism flow did not return a valid output or answer:", tourismOutput);
+    if (!tourismOutput || typeof tourismOutput.answer !== 'string' || tourismOutput.answer.trim() === '') {
+      console.error("Tourism flow did not return a valid or non-empty answer:", tourismOutput);
       answer = TOURISM_FLOW_ERROR_MESSAGE;
       mapUrl = undefined;
       links = [];
@@ -41,7 +41,7 @@ export async function getAiChatResponse(
       answer = tourismOutput.answer;
       mapUrl = tourismOutput.mapUrl;
 
-      // Only attempt to get links if the primary answer was successful
+      // Only attempt to get links if the primary answer was successful and not our error message
       if (answer !== TOURISM_FLOW_ERROR_MESSAGE) {
         try {
           const linksInput: RecommendLinksInput = { query, answer };
@@ -70,4 +70,3 @@ export async function getAiChatResponse(
     throw new Error(`Nizhal is unable to respond right now. Details: ${errorMessageString}`);
   }
 }
-
