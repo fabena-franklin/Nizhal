@@ -30,22 +30,33 @@ export async function getAiChatResponse(
       };
     }
     
-    const tourismOutput: TourismQueryAnsweringOutput = await tourismQueryAnswering(tourismInput);
-    answer = tourismOutput.answer; 
-    mapUrl = tourismOutput.mapUrl;
+    const tourismOutput: TourismQueryAnsweringOutput | undefined = await tourismQueryAnswering(tourismInput);
 
-    if (typeof answer !== 'string') {
-        console.error("Tourism flow returned a non-string answer prior to link recommendation:", answer);
-        answer = TOURISM_FLOW_ERROR_MESSAGE; // Fallback to ensure 'answer' is a string
-    }
+    if (!tourismOutput || typeof tourismOutput.answer !== 'string') {
+      console.error("Tourism flow did not return a valid output or answer:", tourismOutput);
+      answer = TOURISM_FLOW_ERROR_MESSAGE;
+      mapUrl = undefined;
+      links = [];
+    } else {
+      answer = tourismOutput.answer;
+      mapUrl = tourismOutput.mapUrl;
 
-    if (answer !== TOURISM_FLOW_ERROR_MESSAGE) {
-      try {
-        const linksInput: RecommendLinksInput = { query, answer };
-        const linksOutput: RecommendLinksOutput = await recommendLinks(linksInput);
-        links = linksOutput.links || [];
-      } catch (linkError) {
-        console.error("Error in recommendLinks flow:", linkError);
+      // Only attempt to get links if the primary answer was successful
+      if (answer !== TOURISM_FLOW_ERROR_MESSAGE) {
+        try {
+          const linksInput: RecommendLinksInput = { query, answer };
+          const linksOutput: RecommendLinksOutput | undefined = await recommendLinks(linksInput);
+          
+          if (linksOutput && Array.isArray(linksOutput.links)) {
+            links = linksOutput.links;
+          } else {
+            console.error("RecommendLinks flow did not return valid links:", linksOutput);
+            links = [];
+          }
+        } catch (linkError) {
+          console.error("Error in recommendLinks flow:", linkError);
+          links = []; // Default to empty links on error
+        }
       }
     }
     
@@ -53,7 +64,10 @@ export async function getAiChatResponse(
 
   } catch (error) {
     console.error("Critical error in getAiChatResponse:", error);
-    const errorMessage = error instanceof Error ? error.message : "An unknown error occurred with the AI service.";
-    throw new Error(`Nizhal is unable to respond right now. Details: ${errorMessage}`);
+    // Ensure the error message is a string
+    const errorMessageString = error instanceof Error ? error.message : "An unknown error occurred with the AI service.";
+    // This error will be caught by the page component and displayed as a toast
+    throw new Error(`Nizhal is unable to respond right now. Details: ${errorMessageString}`);
   }
 }
+
