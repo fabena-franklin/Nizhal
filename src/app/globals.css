@@ -4,31 +4,38 @@
 
 @layer base {
   :root {
-    --background: 127 42% 94%; /* Light Green - #E8F5E9 */
-    --foreground: 0 0% 3.9%;
-    --card: 127 42% 94%; /* Match background */
-    --card-foreground: 0 0% 3.9%;
-    --popover: 127 42% 94%; /* Match background */
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 90 46% 37%; /* Nature Green - #558B2F */
-    --primary-foreground: 90 40% 98%; /* Lighter for contrast with primary */
-    --secondary: 127 30% 88%; /* Slightly darker light green */
-    --secondary-foreground: 90 46% 30%; /* Darker green for secondary text */
-    --muted: 127 20% 80%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 60 62% 38%; /* Yellow-Green - #9E9D24 */
-    --accent-foreground: 60 60% 96%; /* Light for contrast with accent */
-    --destructive: 0 84.2% 60.2%;
+    --background: 100 60% 97%; /* Very light, almost off-white minty green */
+    --foreground: 222 20% 30%; /* Dark grayish blue for text */
+
+    /* AI Message Bubble & Textarea Background */
+    --card: 100 40% 92%;
+    --card-foreground: 222 20% 30%;
+
+    --popover: 100 40% 92%; /* Same as card */
+    --popover-foreground: 222 20% 30%;
+
+    /* Send Button, Title Text, Leaf Icon */
+    --primary: 100 35% 45%;
+    --primary-foreground: 100 20% 98%; /* Very light color for text on primary */
+
+    /* Header & Input Bar Background */
+    --secondary: 100 50% 95%;
+    --secondary-foreground: 100 35% 35%;
+
+    --muted: 100 30% 90%;
+    --muted-foreground: 222 10% 55%;
+
+    --accent: 100 40% 55%;
+    --accent-foreground: 100 20% 98%;
+
+    --destructive: 0 70% 55%;
     --destructive-foreground: 0 0% 98%;
-    --border: 127 20% 80%; /* Use a muted green for borders */
-    --input: 127 20% 85%; /* Slightly lighter for input fields */
-    --ring: 90 46% 37%; /* Primary color for rings */
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
+
+    --border: 100 30% 88%; /* Borders for cards, input fields etc. */
+    --input: 100 30% 88%;  /* Used for input field borders */
+    --ring: 100 40% 60%;   /* Focus ring, related to primary */
+
+    --radius: 0.75rem; /* Matches image more closely */
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -37,29 +44,33 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
   }
 
   .dark {
-    /* Keeping dark mode defaults for now, can be themed later if needed */
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 90 46% 45%; /* Darker shade of nature green */
-    --primary-foreground: 90 40% 98%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 60 62% 45%; /* Darker shade of yellow-green */
-    --accent-foreground: 60 60% 96%;
-    --destructive: 0 62.8% 30.6%;
+    --background: 222 20% 12%;
+    --foreground: 100 10% 90%;
+    --card: 222 20% 18%;
+    --card-foreground: 100 10% 90%;
+    --popover: 222 20% 18%;
+    --popover-foreground: 100 10% 90%;
+    --primary: 100 35% 55%;
+    --primary-foreground: 100 15% 95%;
+    --secondary: 222 20% 22%;
+    --secondary-foreground: 100 10% 90%;
+    --muted: 222 20% 25%;
+    --muted-foreground: 100 10% 70%;
+    --accent: 100 40% 65%;
+    --accent-foreground: 100 15% 95%;
+    --destructive: 0 60% 50%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 90 46% 45%;
+    --border: 222 20% 28%;
+    --input: 222 20% 28%;
+    --ring: 100 40% 70%;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
@@ -82,7 +93,7 @@
   }
   body {
     @apply text-foreground;
-    background-image: linear-gradient(to bottom, hsl(var(--background)), hsl(160, 50%, 90%), hsl(190, 60%, 92%));
+    background-color: hsl(var(--background));
     background-repeat: no-repeat;
     background-attachment: fixed; /* Keeps gradient fixed during scroll */
     min-height: 100vh; /* Ensures gradient covers full viewport height */
