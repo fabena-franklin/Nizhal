@@ -16,8 +16,9 @@
     --popover-foreground: 120 25% 85%;
 
     /* Send Button, Title Text, Leaf Icon, User Message Bubble */
-    --primary: 120 60% 40%; /* Vibrant, rich green */
+    --primary: 120 60% 45%; /* Vibrant, rich green */
     --primary-foreground: 120 20% 98%; /* Very light color for text on primary */
+    --primary-raw: 120, 60%, 45%; /* Raw HSL values for animations */
 
     /* Header & Input Bar Background */
     --secondary: 210 10% 10%; /* Slightly lighter dark than main bg for depth */
@@ -59,13 +60,14 @@
     --card-foreground: 120 25% 85%;
     --popover: 120 15% 12%;
     --popover-foreground: 120 25% 85%;
-    --primary: 120 60% 45%; /* Slightly adjusted primary for dark if needed, or keep same */
+    --primary: 120 60% 45%;
     --primary-foreground: 120 20% 98%;
+    --primary-raw: 120, 60%, 45%; /* Raw HSL values for animations */
     --secondary: 210 10% 10%;
     --secondary-foreground: 120 25% 70%;
     --muted: 210 10% 20%;
     --muted-foreground: 210 10% 60%;
-    --accent: 120 50% 65%; /* Slightly adjusted accent for dark if needed */
+    --accent: 120 50% 65%;
     --accent-foreground: 120 20% 98%;
     --destructive: 0 60% 50%;
     --destructive-foreground: 0 0% 98%;
@@ -94,10 +96,50 @@
   }
   body {
     @apply text-foreground;
-    /* Subtle gradient from very dark cool black to deep muted green */
-    background-image: linear-gradient(to bottom right, hsl(210, 10%, 5%) 0%, hsl(120, 30%, 10%) 100%);
+    background-color: hsl(var(--background)); /* Base solid color */
     background-repeat: no-repeat;
-    background-attachment: fixed; /* Keeps gradient fixed during scroll */
-    min-height: 100vh; /* Ensures gradient covers full viewport height */
+    background-attachment: fixed; 
+    min-height: 100vh; 
+    position: relative; /* Establish stacking context for pseudo-elements */
+    z-index: 0; /* Explicitly set base stacking context */
+    overflow-x: hidden; /* Prevent potential horizontal scrollbar from pseudo-elements */
+  }
+
+  body::before { /* Static Gradient Layer */
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: linear-gradient(to bottom right, hsl(var(--background)) 0%, hsl(120, 30%, 10%) 100%);
+    z-index: -2; /* Furthest back layer */
+  }
+
+  body::after { /* Animated Lines Layer */
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: 
+      repeating-linear-gradient(60deg, 
+        transparent, 
+        transparent 20px, /* Space between lines */
+        hsla(var(--primary-raw), 0.025) 20px, /* Fainter line color */
+        hsla(var(--primary-raw), 0.025) 22px), /* Line thickness */
+      repeating-linear-gradient(120deg, 
+        transparent, 
+        transparent 20px,
+        hsla(var(--primary-raw), 0.03) 20px, /* Slightly different faint line color */
+        hsla(var(--primary-raw), 0.03) 22px);
+    background-size: 250px 250px; /* Adjust pattern size */
+    opacity: 0.8; 
+    animation: moveLines 180s linear infinite alternate;
+    z-index: -1; /* On top of static gradient, behind actual body content */
+  }
+
+  @keyframes moveLines {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: -500px -750px; /* Adjust for desired movement */
+    }
   }
 }
