@@ -82,7 +82,7 @@
   }
   body {
     @apply text-foreground;
-    background-image: linear-gradient(to bottom, hsl(var(--background)), hsl(140, 40%, 92%), hsl(130, 50%, 97%));
+    background-image: linear-gradient(to bottom, hsl(var(--background)), hsl(160, 50%, 90%), hsl(190, 60%, 92%));
     background-repeat: no-repeat;
     background-attachment: fixed; /* Keeps gradient fixed during scroll */
     min-height: 100vh; /* Ensures gradient covers full viewport height */
