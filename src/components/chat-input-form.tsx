@@ -53,7 +53,7 @@ export function ChatInputForm({ onSubmit, isLoading }: ChatInputFormProps) {
             <FormItem className="flex-grow">
               <FormControl>
                 <Textarea
-                  placeholder="Ask Nizhal about your travel plans..."
+                  placeholder="Hello!i am here for you"
                   className="resize-none min-h-[52px] max-h-[150px] rounded-xl shadow-sm focus-visible:ring-2 focus-visible:ring-primary/50"
                   disabled={isLoading}
                   onKeyDown={handleKeyDown}
