@@ -112,11 +112,13 @@ const tourismQueryAnsweringFlow = ai.defineFlow(
       };
     }
     
-    // Ensure mapUrl is either a valid URL string or undefined, not an empty string.
-    if (output.mapUrl === '') {
+    // Ensure mapUrl is either a valid URL string or undefined.
+    // Zod .optional() expects undefined, not null or an empty string for a .url() schema.
+    if (output.mapUrl === null || output.mapUrl === '') {
         output.mapUrl = undefined;
     }
 
     return output;
   }
 );
+
