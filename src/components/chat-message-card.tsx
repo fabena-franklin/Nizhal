@@ -4,7 +4,7 @@
 import type { ChatMessage } from "@/types";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { Bot, UserCircle, Loader2 } from "lucide-react";
+import { Bot, UserCircle, Loader2, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface ChatMessageCardProps {
@@ -50,24 +50,44 @@ export function ChatMessageCard({ message }: ChatMessageCardProps) {
             <p className="whitespace-pre-wrap">{message.text}</p>
           )}
         </CardContent>
-        {isAi && message.links && message.links.length > 0 && (
-          <CardFooter className="p-4 pt-0 border-t border-border/50">
-            <div className="space-y-1">
-              <h4 className="text-xs font-semibold text-muted-foreground">Suggested Links:</h4>
-              <ul className="list-none space-y-1">
-                {message.links.map((link, index) => (
-                  <li key={index}>
-                    <a
-                      href={link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-accent-foreground hover:text-accent underline hover:no-underline transition-colors"
-                    >
-                      {link}
-                    </a>
-                  </li>
-                ))}
-              </ul>
+        {(isAi && ((message.links && message.links.length > 0) || message.mapUrl)) && (
+          <CardFooter className="p-4 pt-2 border-t border-border/50">
+            <div className="space-y-3">
+              {message.mapUrl && (
+                <div>
+                  <h4 className="text-xs font-semibold text-muted-foreground flex items-center">
+                    <MapPin className="h-3 w-3 mr-1.5" />
+                    Location on Map:
+                  </h4>
+                  <a
+                    href={message.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-accent hover:text-accent/90 underline hover:no-underline transition-colors break-all"
+                  >
+                    {message.mapUrl}
+                  </a>
+                </div>
+              )}
+              {message.links && message.links.length > 0 && (
+                <div>
+                  <h4 className="text-xs font-semibold text-muted-foreground">Suggested Links:</h4>
+                  <ul className="list-none space-y-1">
+                    {message.links.map((link, index) => (
+                      <li key={index}>
+                        <a
+                          href={link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-accent hover:text-accent/90 underline hover:no-underline transition-colors break-all"
+                        >
+                          {link}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           </CardFooter>
         )}

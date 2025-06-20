@@ -7,6 +7,7 @@ import { recommendLinks, RecommendLinksInput, RecommendLinksOutput } from "@/ai/
 interface GetAiResponseOutput {
   answer: string;
   links: string[];
+  mapUrl?: string;
 }
 
 export async function getAiChatResponse(query: string): Promise<GetAiResponseOutput> {
@@ -14,12 +15,13 @@ export async function getAiChatResponse(query: string): Promise<GetAiResponseOut
     const tourismInput: TourismQueryAnsweringInput = { query };
     const tourismOutput: TourismQueryAnsweringOutput = await tourismQueryAnswering(tourismInput);
     const answer = tourismOutput.answer;
+    const mapUrl = tourismOutput.mapUrl;
 
     const linksInput: RecommendLinksInput = { query, answer };
     const linksOutput: RecommendLinksOutput = await recommendLinks(linksInput);
     const links = linksOutput.links || [];
 
-    return { answer, links };
+    return { answer, links, mapUrl };
   } catch (error) {
     console.error("Error getting AI response:", error);
     // Consider more specific error messages based on the error type

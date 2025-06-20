@@ -3,4 +3,5 @@ export interface ChatMessage {
   sender: 'user' | 'ai' | 'loading';
   text: string;
   links?: string[];
+  mapUrl?: string;
 }

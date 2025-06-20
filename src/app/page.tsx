@@ -31,7 +31,7 @@ export default function NizhalNavigatorPage() {
       {
         id: Date.now().toString(),
         sender: 'ai',
-        text: "Hello! I'm Nizhal, your AI tourism assistant. How can I help you plan your next adventure?",
+        text: "Hello! I'm Nizhal, your AI tourism assistant. How can I help you plan your next adventure? Try asking for information about a place, or even 'show me a map of Tokyo'!",
         links: []
       }
     ]);
@@ -60,6 +60,7 @@ export default function NizhalNavigatorPage() {
         sender: "ai",
         text: aiResponse.answer,
         links: aiResponse.links,
+        mapUrl: aiResponse.mapUrl,
       };
       setMessages((prevMessages) => [...prevMessages.filter(m => m.sender !== 'loading'), aiMessage]);
     } catch (error) {
