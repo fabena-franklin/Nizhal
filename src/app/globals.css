@@ -126,22 +126,22 @@
     background-image:
       repeating-linear-gradient(
         45deg,
-        hsla(var(--primary-raw), 0.03), /* Faint primary color line */
-        hsla(var(--primary-raw), 0.03) 1px,
+        hsla(var(--primary-raw), 0.05), /* Increased opacity */
+        hsla(var(--primary-raw), 0.05) 1px,
         transparent 1px,
         transparent 60px /* Spacing between lines */
       ),
       repeating-linear-gradient(
         -45deg,
-        hsla(var(--primary-raw), 0.02), /* Even fainter cross line */
-        hsla(var(--primary-raw), 0.02) 1px,
+        hsla(var(--primary-raw), 0.04), /* Increased opacity */
+        hsla(var(--primary-raw), 0.04) 1px,
         transparent 1px,
         transparent 60px
       );
     background-size: 200% 200%; /* Larger size for smoother animation */
     animation: line-flow 60s linear infinite;
     z-index: -1; /* Behind content, but above the static gradient */
-    opacity: 0.7; /* Overall opacity for subtlety */
+    opacity: 1; /* Pseudo-element fully opaque, line opacity controlled in hsla */
   }
 }
 
