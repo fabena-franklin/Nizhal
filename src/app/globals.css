@@ -14,8 +14,8 @@
     --popover: 120 15% 12%; 
     --popover-foreground: 120 25% 85%;
 
-    --primary: 120 60% 45%; /* Maintained Green */
-    --primary-foreground: 120 20% 98%;
+    --primary: 130 65% 55%; /* Slightly more vivid/cyan green */
+    --primary-foreground: 130 20% 98%; /* Adjusted for new primary */
     
     --secondary: 210 10% 10%; 
     --secondary-foreground: 120 25% 70%;
@@ -23,7 +23,7 @@
     --muted: 210 10% 20%; 
     --muted-foreground: 210 10% 60%;
 
-    --accent: 130 60% 60%; 
+    --accent: 130 60% 70%; /* Lighter, harmonious green for accent */
     --accent-foreground: 130 20% 98%;
 
     --destructive: 0 60% 50%; 
@@ -31,7 +31,7 @@
 
     --border: 210 10% 25%; 
     --input: 210 10% 25%;  
-    --ring: 120 60% 50%;   
+    --ring: 130 65% 60%;   /* Adjusted for new primary */
 
     --radius: 0.75rem; 
     --sidebar-background: 0 0% 98%;
@@ -56,19 +56,19 @@
     --card-foreground: 120 25% 85%;
     --popover: 120 15% 12%;
     --popover-foreground: 120 25% 85%;
-    --primary: 120 60% 45%;
-    --primary-foreground: 120 20% 98%;
+    --primary: 130 65% 55%; /* Slightly more vivid/cyan green */
+    --primary-foreground: 130 20% 98%;
     --secondary: 210 10% 10%;
     --secondary-foreground: 120 25% 70%;
     --muted: 210 10% 20%;
     --muted-foreground: 210 10% 60%;
-    --accent: 130 60% 60%;
+    --accent: 130 60% 70%; /* Lighter, harmonious green for accent */
     --accent-foreground: 130 20% 98%;
     --destructive: 0 60% 50%;
     --destructive-foreground: 0 0% 98%;
     --border: 210 10% 25%;
     --input: 210 10% 25%;
-    --ring: 120 60% 50%;
+    --ring: 130 65% 60%; /* Adjusted for new primary */
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
@@ -137,17 +137,16 @@
       58vw 10vh 0 0px hsla(0, 0%, 100%, 0.85),
       78vw 85vh 0 0px hsla(0, 0%, 100%, 0.65),
       95vw 35vh 0 0px hsla(0, 0%, 100%, 0.45);
-    animation: twinkle-stars 15s ease-in-out infinite alternate;
+    animation: twinkle-stars 3s ease-in-out infinite; /* Faster animation, no alternate for sharper loop */
     z-index: -1; 
     pointer-events: none;
   }
 }
 
 @keyframes twinkle-stars {
-  0%, 100% {
-    opacity: 0.6; 
-  }
-  50% {
-    opacity: 1; 
-  }
+  0%   { opacity: 0.4; } /* Start a bit dimmer */
+  25%  { opacity: 1.0; } /* Brightest point */
+  50%  { opacity: 0.6; } /* Dim down */
+  75%  { opacity: 0.9; } /* Brighten up again */
+  100% { opacity: 0.4; } /* Return to start opacity for smooth loop */
 }
