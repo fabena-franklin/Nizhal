@@ -5,37 +5,33 @@
 
 @layer base {
   :root {
-    --background: 210 10% 5%; /* Very dark, slightly cool black */
-    --foreground: 120 25% 90%; /* Light, slightly muted green for text */
+    --background: 210 68% 11%; /* Deep Navy Blue */
+    --foreground: 120 25% 90%; 
 
-    /* AI Message Bubble & Textarea Background */
-    --card: 120 15% 12%; /* Darker card bg, distinct from main */
-    --card-foreground: 120 25% 85%; /* Light green text on card */
+    --card: 120 15% 12%; 
+    --card-foreground: 120 25% 85%;
 
-    --popover: 120 15% 12%; /* Same as card */
+    --popover: 120 15% 12%; 
     --popover-foreground: 120 25% 85%;
 
-    /* Send Button, Title Text, Leaf Icon, User Message Bubble */
-    --primary: 130 65% 50%; /* Vibrant, modern green (slightly more cyan-ish) */
-    --primary-foreground: 130 20% 98%; /* Very light color for text on primary */
-    --primary-raw: 130, 65%, 50%; /* Raw HSL values for primary, for animation */
+    --primary: 130 65% 50%; 
+    --primary-foreground: 130 20% 98%;
     
-    /* Header & Input Bar Background */
-    --secondary: 210 10% 10%; /* Slightly lighter dark than main bg for depth */
-    --secondary-foreground: 120 25% 70%; /* Muted green for text on secondary */
+    --secondary: 210 10% 10%; 
+    --secondary-foreground: 120 25% 70%;
 
-    --muted: 210 10% 20%; /* For subtle elements like User Avatar background */
-    --muted-foreground: 210 10% 60%; /* Muted text on muted bg */
+    --muted: 210 10% 20%; 
+    --muted-foreground: 210 10% 60%;
 
-    --accent: 130 60% 70%; /* Lighter, brighter modern green for links/accents */
-    --accent-foreground: 130 20% 98%; /* Very light text on accent */
+    --accent: 130 60% 70%; 
+    --accent-foreground: 130 20% 98%;
 
-    --destructive: 0 60% 50%; /* Red for errors */
+    --destructive: 0 60% 50%; 
     --destructive-foreground: 0 0% 98%;
 
-    --border: 210 10% 25%; /* Subtle dark borders */
-    --input: 210 10% 25%;  /* Used for input field borders */
-    --ring: 130 65% 55%;   /* Focus ring, related to new primary */
+    --border: 210 10% 25%; 
+    --input: 210 10% 25%;  
+    --ring: 130 65% 55%;   
 
     --radius: 0.75rem; 
     --sidebar-background: 0 0% 98%;
@@ -54,7 +50,7 @@
   }
 
   .dark {
-    --background: 210 10% 5%;
+    --background: 210 68% 11%; /* Deep Navy Blue */
     --foreground: 120 25% 90%;
     --card: 120 15% 12%;
     --card-foreground: 120 25% 85%;
@@ -62,7 +58,6 @@
     --popover-foreground: 120 25% 85%;
     --primary: 130 65% 50%;
     --primary-foreground: 130 20% 98%;
-    --primary-raw: 130, 65%, 50%;
     --secondary: 210 10% 10%;
     --secondary-foreground: 120 25% 70%;
     --muted: 210 10% 20%;
@@ -94,46 +89,64 @@
   }
   body {
     @apply text-foreground;
-    background-color: hsl(var(--background)); /* Base color */
+    background-color: hsl(var(--background)); 
     min-height: 100vh; 
-    overflow-x: hidden; /* Important to prevent horizontal scroll */
-    position: relative; /* For pseudo-elements stacking context */
-    z-index: 0; /* Ensure body acts as a base for z-indexed pseudo-elements */
+    overflow-x: hidden; 
+    position: relative; 
+    z-index: 0; 
   }
 
-  /* body::before {
+  body::before { /* Nebula Layer */
     content: "";
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: linear-gradient(
-      160deg,
-      hsl(var(--background)) 0%,
-      hsl(120 20% 8%) 100% 
-    );
+    background-image: 
+      radial-gradient(ellipse at 20% 30%, hsla(260, 44%, 63%, 0.15) 0%, transparent 70%),
+      radial-gradient(ellipse at 80% 70%, hsla(340, 82%, 66%, 0.1) 0%, transparent 70%);
     z-index: -2; 
-  } */
+    pointer-events: none;
+  }
 
-  body::after { /* Simplified animated layer */
+  body::after { /* Stars Layer */
     content: "";
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: hsl(var(--primary-raw)); /* Solid primary green base */
-    animation: animate-pulse-bg 7s linear infinite; /* Animation slightly faster */
-    z-index: -1; /* Behind content */
+    background: transparent;
+    box-shadow:
+      /* Tiny stars (1px equivalent, spread 0px) */
+      5vw 10vh 0 0px hsl(0, 0%, 100%), 15vw 30vh 0 0px hsl(0, 0%, 100%),
+      20vw 5vh 0 0px hsl(0, 0%, 100%), 30vw 50vh 0 0px hsl(0, 0%, 100%),
+      45vw 15vh 0 0px hsl(0, 0%, 100%), 55vw 60vh 0 0px hsl(0, 0%, 100%),
+      60vw 25vh 0 0px hsl(0, 0%, 100%), 70vw 70vh 0 0px hsl(0, 0%, 100%),
+      80vw 10vh 0 0px hsl(0, 0%, 100%), 90vw 40vh 0 0px hsl(0, 0%, 100%),
+      25vw 80vh 0 0px hsl(0, 0%, 100%), 50vw 95vh 0 0px hsl(0, 0%, 100%),
+      5vw 85vh 0 0px hsl(0, 0%, 100%), 95vw 15vh 0 0px hsl(0, 0%, 100%),
+      33vw 33vh 0 0px hsl(0, 0%, 100%), 66vw 66vh 0 0px hsl(0, 0%, 100%),
+      12vw 48vh 0 0px hsl(0, 0%, 100%), 48vw 82vh 0 0px hsl(0, 0%, 100%),
+      88vw 22vh 0 0px hsl(0, 0%, 100%), 22vw 88vh 0 0px hsl(0, 0%, 100%),
+      /* Slightly larger stars (2px equivalent, spread 1px), slightly less opaque */
+      10vw 65vh 0 1px hsla(0, 0%, 100%, 0.8), 35vw 5vh 0 1px hsla(0, 0%, 100%, 0.8),
+      65vw 45vh 0 1px hsla(0, 0%, 100%, 0.8), 85vw 85vh 0 1px hsla(0, 0%, 100%, 0.8),
+      5vw 50vh 0 1px hsla(0, 0%, 100%, 0.8), 95vw 55vh 0 1px hsla(0, 0%, 100%, 0.8),
+      40vw 20vh 0 1px hsla(0, 0%, 100%, 0.8), 20vw 75vh 0 1px hsla(0, 0%, 100%, 0.8),
+      75vw 35vh 0 1px hsla(0, 0%, 100%, 0.8), 50vw 80vh 0 1px hsla(0, 0%, 100%, 0.8);
+    animation: twinkle-stars 15s ease-in-out infinite alternate;
+    z-index: -1; 
+    pointer-events: none;
   }
 }
 
-@keyframes animate-pulse-bg {
+@keyframes twinkle-stars {
   0%, 100% {
-    opacity: 0.1; /* Start and end with higher base opacity (10%) */
+    opacity: 0.6; 
   }
   50% {
-    opacity: 0.3; /* Peak with higher opacity (30%) */
+    opacity: 1; 
   }
 }
