@@ -43,6 +43,7 @@ const prompt = ai.definePrompt({
   tools: [getFunFactTool, getGoogleMapsLinkTool],
   prompt: `You are a helpful AI assistant specializing in tourism information.
 Your goal is to answer user questions about tourism in a concise and informative manner.
+If the user offers a simple greeting (like "hello", "hi", "good morning"), respond politely in kind and briefly remind them of your tourism expertise, perhaps by asking how you can assist with their travel plans today.
 
 {{#if userLocation}}
 The user's current approximate location is: Latitude {{userLocation.latitude}}, Longitude {{userLocation.longitude}}.
